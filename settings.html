@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全局设置</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <h1>⚙️ 全局设置</h1>
+        <a href="index.html" class="back-link">← 返回首页</a>
+    </div>
+
+    <div class="panel">
+        <p style="color: #6b7280; margin-bottom: 1.5rem;">配置 Gitee 仓库信息，所有工具默认复用。Token 仅存储在您浏览器本地。</p>
+
+        <div class="form-group">
+            <label>私人令牌 (Token)</label>
+            <input type="password" id="globalToken" placeholder="请输入 Gitee 私人令牌">
+        </div>
+        <div class="form-group">
+            <label>仓库所有者 (Owner)</label>
+            <input type="text" id="globalOwner" placeholder="用户名或组织名">
+        </div>
+        <div class="form-group">
+            <label>仓库名称 (Repo)</label>
+            <input type="text" id="globalRepo" placeholder="仓库名">
+        </div>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button class="btn" id="saveGlobalBtn">💾 保存全局配置</button>
+            <button class="btn btn-outline" id="clearGlobalBtn">清除配置</button>
+        </div>
+        <div id="settingsMsg" style="margin-top: 1rem; font-weight: 500;"></div>
+    </div>
+
+    <div class="footer">
+        <p>© 2026 个人静态工具集</p>
+    </div>
+</div>
+
+<script src="js/configHelper.js"></script>
+<script src="js/settings.js"></script>
+</body>
+</html>
