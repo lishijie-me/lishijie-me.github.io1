@@ -8,9 +8,13 @@
 </head>
 <body>
 <div class="container">
-    <div class="page-header">
-        <h1>👤 关于我</h1>
-        <a href="index.html" class="back-link">← 返回首页</a>
+    <!-- 头部：标题 + 控制按钮 + 返回链接，统一在一行 -->
+    <div class="page-header" style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 1rem;">
+        <h1 style="margin: 0; flex: 1 1 auto;">👤 关于我</h1>
+        <button id="toggleAllBtn" class="btn btn-outline" style="font-size:0.85rem; padding:0.3rem 0.8rem; flex-shrink:0;">
+            📂 展开全部
+        </button>
+        <a href="index.html" class="back-link" style="flex-shrink:0;">← 返回首页</a>
     </div>
 
     <div class="panel" style="padding-bottom:0.5rem;">
@@ -48,9 +52,29 @@
         <details>
             <summary>📬 联系方式</summary>
             <div class="content">
-<!--                <p>GitHub: <a href="https://lishijie-me.github.io" target="_blank">lishijie-me</a></p>-->
-<!--                <p>Gitee: <a href="https://gitee.com/lishijie-me" target="_blank">lishijie-me</a></p>-->
-                <p>📧 邮箱: 2424782003@qq.com</p>
+                <!--                <p>GitHub: <a href="https://lishijie-me.github.io" target="_blank">lishijie-me</a></p>-->
+                <!--                <p>Gitee: <a href="https://gitee.com/lishijie-me" target="_blank">lishijie-me</a></p>-->
+                <p>📧 邮箱: xxx@qq.com</p>
+            </div>
+        </details>
+
+        <details>
+            <summary>📄 我的文章</summary>
+            <div class="content">
+                <ul>
+                    <li>
+                        <a href="https://gitee.com/lishijie-me/lishijie-me/blob/main/articles/20260831-%E4%B8%AA%E4%BA%BA%E9%9D%99%E6%80%81%E5%B7%A5%E5%85%B7%E9%9B%86%20-%20%E5%AE%8C%E6%95%B4%E9%A1%B9%E7%9B%AE%E9%9C%80%E6%B1%82%E6%96%87%E6%A1%A3%20v2.0.md" target="_blank">使用 Gitee API 构建个人静态工具集</a>
+                        <span style="color: #9ca3af; font-size:0.85rem;"> · 2026-08-31</span>
+                    </li>
+                    <li>
+                        <a href="https://gitee.com/lishijie-me/lishijie-me/blob/main/articles/20260808-SpringAI%E6%8E%A5%E5%85%A5.md" target="_blank">spring boot 接入 spring ai</a>
+                        <span style="color: #9ca3af; font-size:0.85rem;"> · 2026-08-08</span>
+                    </li>
+                </ul>
+
+                <p style="margin-top:0.5rem; font-size:0.9rem; color:#6b7280;">
+                    ✍️ 更多文章请访问我的 <a href="https://gitee.com/lishijie-me/lishijie-me" target="_blank">个人博客</a>
+                </p>
             </div>
         </details>
     </div>
