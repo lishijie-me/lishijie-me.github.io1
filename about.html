@@ -5,6 +5,225 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>关于我</title>
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ===== 年度目标 - 与页面其他模块完全统一 ===== */
+
+        /* 1. 外层折叠块 summary 与页面其他 details 完全一致 */
+        .goal-details summary {
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0.2rem 0;
+            font-size: 1rem;
+            color: #1f2937;
+            list-style: none;
+            display: inline-block;
+        }
+        .goal-details summary::-webkit-details-marker {
+            display: none;
+        }
+        .goal-details summary::before {
+            content: "▶ ";
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+        .goal-details[open] summary::before {
+            content: "▼ ";
+        }
+        .goal-details .summary-hint {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #9ca3af;
+            margin-left: 0.5rem;
+        }
+
+        /* 2. 内容区域与 .content 样式统一 */
+        .goal-details .goal-content {
+            padding-top: 0.5rem;
+            padding-left: 0.2rem;
+        }
+
+        /* 3. 年份选项卡导航 - 简洁风格 */
+        .goal-tabs-nav {
+            display: flex;
+            gap: 0.3rem;
+            border-bottom: 2px solid #e5e7eb;
+            padding-bottom: 0;
+            flex-wrap: nowrap;
+            min-width: max-content;
+        }
+        /* 滚动容器 */
+        .goal-tabs-nav-wrapper {
+            overflow-x: auto;
+            overflow-y: hidden;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 4px;
+            scrollbar-width: thin;
+        }
+        .goal-tabs-nav-wrapper::-webkit-scrollbar {
+            height: 3px;
+        }
+        .goal-tabs-nav-wrapper::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 4px;
+        }
+        .goal-tabs-nav-wrapper::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .goal-tabs-nav .tab-btn {
+            padding: 0.3rem 1rem;
+            border: none;
+            background: transparent;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #6b7280;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.2s ease;
+            border-radius: 6px 6px 0 0;
+            position: relative;
+            bottom: -2px;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+        .goal-tabs-nav .tab-btn:hover {
+            color: #1f2937;
+            background: #f3f4f6;
+        }
+        .goal-tabs-nav .tab-btn.active {
+            color: #3b82f6;
+            border-bottom-color: #3b82f6;
+            background: transparent;
+        }
+        .goal-tabs-nav .tab-btn .tab-status {
+            font-size: 0.55rem;
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 0.02rem 0.4rem;
+            border-radius: 10px;
+            margin-left: 0.2rem;
+            font-weight: 400;
+        }
+        .goal-tabs-nav .tab-btn .tab-status.done {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .goal-tabs-nav .tab-btn .tab-status.planning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        /* 4. 内容面板 - 淡入动画 */
+        .goal-tabs-panels {
+            padding-top: 0.8rem;
+        }
+        .goal-tabs-panels .tab-panel {
+            display: none;
+            animation: fadeIn 0.2s ease;
+        }
+        .goal-tabs-panels .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 5. 目标列表 - 与页面其他列表（ul）风格统一 */
+        .goal-list {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        .goal-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            padding: 0.35rem 0;
+            border-bottom: 1px dashed #f3f4f6;
+        }
+        .goal-list li:last-child {
+            border-bottom: none;
+        }
+        .goal-list input[type="checkbox"] {
+            margin-top: 0.2rem;
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+            accent-color: #3b82f6;
+            cursor: pointer;
+        }
+        .goal-list input[type="checkbox"]:disabled {
+            accent-color: #9ca3af;
+            cursor: default;
+        }
+        .goal-list .goal-text {
+            flex: 1;
+        }
+        .goal-list .goal-text .goal-title {
+            font-weight: 500;
+        }
+        .goal-list .goal-text .goal-desc {
+            display: block;
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 0.05rem;
+        }
+        /* 备注 - 与页面正文风格统一：灰色小字，无特殊背景 */
+        .goal-list .goal-text .goal-remark {
+            display: block;
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-top: 0.1rem;
+        }
+        .goal-list .goal-text .goal-remark.done-remark {
+            color: #10b981;
+        }
+        .goal-list .goal-text .goal-remark .highlight {
+            color: #8b5cf6;
+            font-weight: 500;
+        }
+
+        /* 6. 年度总结 - 与页面 .content 风格统一 */
+        .goal-notes {
+            margin-top: 0.8rem;
+            padding: 0.6rem 0.8rem;
+            background: #f8fafc;
+            border-radius: 6px;
+            border-left: 3px solid #e5e7eb;
+        }
+        .goal-notes p {
+            margin: 0.15rem 0;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+        .goal-notes .note-label {
+            font-weight: 600;
+            color: #1e293b;
+            font-size: 0.85rem;
+        }
+
+        /* 7. 空状态 */
+        .empty-tip {
+            color: #9ca3af;
+            text-align: center;
+            padding: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* 8. 响应式 */
+        @media (max-width: 480px) {
+            .goal-tabs-nav .tab-btn {
+                font-size: 0.78rem;
+                padding: 0.25rem 0.7rem;
+            }
+            .goal-tabs-nav .tab-btn .tab-status {
+                font-size: 0.5rem;
+                padding: 0.02rem 0.3rem;
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="container">
@@ -20,13 +239,18 @@
     <div class="panel" style="padding-bottom:0.5rem;">
         <p style="font-size:1.1rem; margin-bottom:1.5rem;">热爱编码、写作与生活的开发者。</p>
 
+        <!-- ==================== 个人简介 ==================== -->
         <details>
             <summary>📌 个人简介</summary>
             <div class="content">
-                <p>全栈开发者，多年互联网从业经验。热衷于开源、效率工具与知识管理。</p>
+                <ul>
+                    <li>全栈开发者，多年银行/证券业从业经验</li>
+                    <li>热衷于开源、效率工具与知识管理</li>
+                </ul>
             </div>
         </details>
 
+        <!-- ==================== 技术栈 ==================== -->
         <details>
             <summary>🧰 技术栈</summary>
             <div class="content">
@@ -39,6 +263,7 @@
             </div>
         </details>
 
+        <!-- ==================== 个人履历 ==================== -->
         <details>
             <summary>📅 个人履历</summary>
             <div class="content">
@@ -49,15 +274,15 @@
             </div>
         </details>
 
+        <!-- ==================== 联系方式 ==================== -->
         <details>
             <summary>📬 联系方式</summary>
             <div class="content">
-                <!--                <p>GitHub: <a href="https://lishijie-me.github.io" target="_blank">lishijie-me</a></p>-->
-                <!--                <p>Gitee: <a href="https://gitee.com/lishijie-me" target="_blank">lishijie-me</a></p>-->
                 <p>📧 邮箱: xxx@qq.com</p>
             </div>
         </details>
 
+        <!-- ==================== 我的文章 ==================== -->
         <details>
             <summary>📄 我的文章</summary>
             <div class="content">
@@ -77,10 +302,187 @@
                 </p>
             </div>
         </details>
-    </div>
+
+        <!-- ============================================================ -->
+        <!-- ================ 年度目标（折叠 + 选项卡） ==================== -->
+        <!-- ============================================================ -->
+
+        <details>
+            <summary>
+                🎯 年度目标
+                <span class="summary-hint"></span>
+            </summary>
+
+            <div class="goal-content">
+                <div class="goal-tabs">
+                    <!-- 年份标签导航：从左到右 由近及远（2026 → 2015） -->
+                    <div class="goal-tabs-nav-wrapper">
+                        <div class="goal-tabs-nav" id="goalTabNav">
+                            <!-- 由近及远：2026 在最左，2015 在最右 -->
+                            <button class="tab-btn active" data-year="2026">2026 <span class="tab-status">进行中</span></button>
+                            <button class="tab-btn" data-year="2025">2025 <span class="tab-status done">已完成</span></button>
+                            <button class="tab-btn" data-year="2024">2024 <span class="tab-status done">已完成</span></button>
+                        </div>
+                    </div>
+
+                    <!-- 内容面板 -->
+                    <div class="goal-tabs-panels">
+
+                        <!-- ====== 2026 年度 ====== -->
+                        <div class="tab-panel active" data-year="2026">
+                            <ul class="goal-list">
+                                <li>
+                                    <input type="checkbox" checked>
+                                    <span class="goal-text">
+                                        <span class="goal-title">📚 读完 12 本技术/非技术书籍</span>
+                                        <span class="goal-desc">目标：每月至少 1 本，涵盖架构、产品、人文</span>
+                                        <span class="goal-remark">✅ 已完成 8 本 · 《重构》《设计模式》《人类群星闪耀时》等</span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" checked>
+                                    <span class="goal-text">
+                                        <span class="goal-title">✍️ 输出 50 篇技术文章/笔记</span>
+                                        <span class="goal-desc">目标：平均每周 1 篇，沉淀知识体系</span>
+                                        <span class="goal-remark">✅ 已完成 42 篇 · 持续输出中</span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <input type="checkbox">
+                                    <span class="goal-text">
+                                        <span class="goal-title">💻 完成 3 个个人开源项目</span>
+                                        <span class="goal-desc">目标：至少 1 个项目获得 100+ Star</span>
+                                        <span class="goal-remark"><span class="highlight">⏳ 已完成 2 个</span>，第 3 个正在规划中</span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <input type="checkbox">
+                                    <span class="goal-text">
+                                        <span class="goal-title">🏃 坚持运动，全年跑步 500 公里</span>
+                                        <span class="goal-desc">目标：每周 2-3 次，保持身体健康</span>
+                                        <span class="goal-remark"><span class="highlight">⏳ 已完成 380 公里</span> · 距离目标还有 120 公里 💪</span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <input type="checkbox">
+                                    <span class="goal-text">
+                                        <span class="goal-title">🌍 去 2 个新的城市旅行</span>
+                                        <span class="goal-desc">目标：拓宽视野，感受不同地域文化</span>
+                                        <span class="goal-remark"><span class="highlight">⏳ 已完成 1 个</span>（成都），下一个计划去大理</span>
+                                    </span>
+                                </li>
+                            </ul>
+
+                            <div class="goal-notes">
+                                <p><span class="note-label">📝 年度总结：</span></p>
+                                <p>整体进展顺利，技术输出和读书计划超额完成。下半年重点冲刺开源项目和旅行计划。</p>
+                                <p style="margin-top:0.2rem; color:#8b5cf6;">🔥 当前完成度：3.5/5 · 继续加油！</p>
+                            </div>
+                        </div>
+
+                        <!-- ====== 2025 年度 ====== -->
+                        <div class="tab-panel" data-year="2025">
+                            <ul class="goal-list">
+                                <li>
+                                    <input type="checkbox" checked disabled>
+                                    <span class="goal-text">
+                                        <span class="goal-title">📚 读完 10 本书</span>
+                                        <span class="goal-desc">技术 + 人文各半</span>
+                                        <span class="goal-remark done-remark">✅ 实际完成 12 本，超额完成</span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" checked disabled>
+                                    <span class="goal-text">
+                                        <span class="goal-title">🏃 跑步 400 公里</span>
+                                        <span class="goal-desc">坚持每周运动</span>
+                                        <span class="goal-remark done-remark">✅ 实际完成 420 公里</span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" checked disabled>
+                                    <span class="goal-text">
+                                        <span class="goal-title">✍️ 写 30 篇技术博客</span>
+                                        <span class="goal-desc">积累知识，分享经验</span>
+                                        <span class="goal-remark done-remark">✅ 实际完成 35 篇</span>
+                                    </span>
+                                </li>
+                                <li>
+                                    <input type="checkbox" checked disabled>
+                                    <span class="goal-text">
+                                        <span class="goal-title">🎯 完成 2 个开源项目</span>
+                                        <span class="goal-desc">提升技术影响力</span>
+                                        <span class="goal-remark done-remark">✅ 完成 2 个，其中 1 个获得 200+ Star</span>
+                                    </span>
+                                </li>
+                            </ul>
+
+                            <div class="goal-notes">
+                                <p><span class="note-label">📝 年度回顾：</span></p>
+                                <p>所有目标均已完成，技术博客数量和质量均有突破，跑步习惯已养成。🎉</p>
+                            </div>
+                        </div>
+
+                        <!-- ====== 2015-2024：空状态 ====== -->
+                        <div class="tab-panel" data-year="2024">
+                            <div class="empty-tip">📭 该年度暂无记录</div>
+                        </div>
+
+                    </div><!-- /goal-tabs-panels -->
+                </div><!-- /goal-tabs -->
+            </div><!-- /goal-content -->
+
+        </details>
+        <!-- ==================== 年度目标结束 ==================== -->
+
+    </div><!-- /panel -->
 
     <div class="footer"><p>© 2026-present · Fake it until you make it</p></div>
 </div>
+
 <script src="js/about.js"></script>
+<script>
+    (function() {
+        // 年份选项卡切换
+        const tabs = document.querySelectorAll('.goal-tabs-nav .tab-btn');
+        const panels = document.querySelectorAll('.goal-tabs-panels .tab-panel');
+
+        function switchTab(year) {
+            tabs.forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.year === year);
+            });
+            panels.forEach(panel => {
+                panel.classList.toggle('active', panel.dataset.year === year);
+            });
+        }
+
+        tabs.forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                switchTab(this.dataset.year);
+            });
+        });
+
+        // 默认激活
+        const hasActive = document.querySelector('.goal-tabs-nav .tab-btn.active');
+        if (!hasActive && tabs.length > 0) {
+            tabs[0].classList.add('active');
+            const firstPanel = document.querySelector('.goal-tabs-panels .tab-panel');
+            if (firstPanel) firstPanel.classList.add('active');
+        }
+
+        // 滚动到当前激活标签
+        const activeTab = document.querySelector('.goal-tabs-nav .tab-btn.active');
+        if (activeTab) {
+            const wrapper = document.querySelector('.goal-tabs-nav-wrapper');
+            if (wrapper) {
+                setTimeout(() => {
+                    const offsetLeft = activeTab.offsetLeft - wrapper.clientWidth / 2 + activeTab.clientWidth / 2;
+                    wrapper.scrollTo({ left: Math.max(0, offsetLeft), behavior: 'smooth' });
+                }, 150);
+            }
+        }
+    })();
+</script>
 </body>
 </html>
