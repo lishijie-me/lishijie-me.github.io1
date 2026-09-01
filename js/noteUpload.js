@@ -84,6 +84,11 @@
                 message: `更新手记: ${path}`
             });
             msgDiv.innerHTML = `<span style="color:#10b981;">✅ 上传成功！ <a href="${result.content.html_url}" target="_blank">查看文件</a></span>`;
+
+            // ===== 新增：更新热力图数据 =====
+            if (typeof window.Heatmap !== 'undefined') {
+                window.Heatmap.update();
+            }
         } catch (err) {
             msgDiv.innerHTML = `<span style="color:#ef4444;">❌ 上传失败: ${err.message}</span>`;
             console.error(err); // 可在控制台查看详细堆栈

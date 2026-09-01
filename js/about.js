@@ -31,4 +31,12 @@
 
     // 初始化按钮文字
     updateButtonText();
+
+    // ===== 新增：加载热力图 =====
+    // 等待 DOM 渲染完成后加载
+    setTimeout(function() {
+        if (typeof window.Heatmap !== 'undefined') {
+            window.Heatmap.render('#heatmapContainer');
+        }
+    }, 300);
 })();
