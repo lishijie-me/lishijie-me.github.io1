@@ -469,3 +469,87 @@ a:hover {
     color: #0366d6;
     font-weight: 500;
 }
+
+/* ==== 首页头部 ==== */
+.home-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.home-header h1 {
+    margin: 0;
+}
+
+.post-count {
+    color: #888;
+    font-size: 0.9rem;
+}
+
+/* ==== 分页 ==== */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid #eee;
+    flex-wrap: wrap;
+}
+
+.page-numbers {
+    display: flex;
+    gap: 6px;
+}
+
+.page-btn,
+.page-num {
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    color: #444;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s;
+}
+
+.page-btn:hover:not(:disabled),
+.page-num:hover:not(.active) {
+    border-color: #0366d6;
+    color: #0366d6;
+}
+
+.page-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.page-num.active {
+    background: #0366d6;
+    border-color: #0366d6;
+    color: #fff;
+}
+
+/* 移动端：页码太多时换行 */
+@media (max-width: 600px) {
+    .pagination {
+        flex-direction: column;
+    }
+    .page-numbers {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+}
+
+.page-dots {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 6px;
+    color: #999;
+    user-select: none;
+    font-size: 0.9rem;
+}
