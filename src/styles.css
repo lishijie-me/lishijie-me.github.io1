@@ -307,3 +307,165 @@ a:hover {
 }
 
 .nav { display: flex; gap: 20px; }
+
+/* ==== 年度目标 ==== */
+.yearly-goals {
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+}
+
+.goals-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.goals-icon {
+    font-size: 1.6rem;
+}
+
+.goals-header h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    color: #222;
+}
+
+/* Tabs */
+.goals-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 8px;
+}
+
+.goals-tab {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #888;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.goals-tab:hover {
+    color: #0366d6;
+    background: #f5f9ff;
+}
+
+.goals-tab.active {
+    color: #0366d6;
+    background: #e8f2ff;
+}
+
+.tab-status {
+    font-size: 0.75rem;
+    font-weight: 400;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.goals-tab.active .tab-status {
+    background: #0366d6;
+    color: #fff;
+}
+
+.goals-tab:not(.active) .tab-status {
+    background: #f0f0f0;
+    color: #888;
+}
+
+/* 目标列表 */
+.goals-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.goal-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.goal-item:hover {
+    background: #fafafa;
+}
+
+.goal-check {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    color: #ccc;
+    flex-shrink: 0;
+}
+
+.goal-check.checked {
+    color: #0366d6;
+}
+
+.goal-content {
+    flex: 1;
+}
+
+.goal-title {
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.goal-emoji {
+    font-size: 1.1rem;
+}
+
+.goal-target {
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 4px;
+}
+
+.goal-progress {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* 总结 */
+.goals-summary {
+    margin-top: 24px;
+    padding: 16px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border-left: 4px solid #0366d6;
+}
+
+.summary-title {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.summary-text {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.summary-footer {
+    font-size: 0.9rem;
+    color: #0366d6;
+    font-weight: 500;
+}

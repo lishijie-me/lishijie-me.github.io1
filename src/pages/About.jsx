@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import YearlyGoals from '../components/YearlyGoals';
 
 export default function About() {
     return (
@@ -52,7 +53,9 @@ export default function About() {
                     </li>
                 </ul>
             </section>
-
+            <section className="about-section">
+                <YearlyGoals />
+            </section>
             <p className="back">
                 <Link to="/">← 返回首页</Link>
             </p>
