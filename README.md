@@ -9,3 +9,7 @@
 ## 2026 长腹肌
 
 </details>
+
+
+
+npm run dev 本地启动
